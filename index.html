@@ -120,7 +120,7 @@ catch(e){if(typeof e=='string'&&/Token|Repositório|PÚBLICO/.test(e))return loc
 function lock(msg){on=0;document.body.classList.add('lk');setSv('off');const d=G||{};
 $('#m').innerHTML=`<form class="lock" id="lf"><h2>Entrar</h2><p class="mut">Este ateliê é privado. Os dados ficam num repositório privado do seu GitHub e só abrem com o seu token.</p>${msg?`<p class="er">${esc(msg)}</p>`:''}
 <label>Usuário do GitHub<input id="lo" required autocomplete="username" value="${esc(d.owner||'')}"></label>
-<label>Repositório privado dos dados<input id="lr" required value="${esc(d.repo||'atelie-dados')}"></label>
+<label>Repositório privado dos dados<input id="lr" required value="${esc(d.repo||'')}"></label>
 <label>Token de acesso<input id="lt" type="password" required autocomplete="current-password" placeholder="github_pat_…"></label>
 <button class="b">Entrar</button><p class="mut"><small>O token fica salvo só neste aparelho. Use “Sair deste aparelho” em Exportar para apagá-lo.</small></p></form>`;
 $('#lf').onsubmit=e=>{e.preventDefault();G={owner:$('#lo').value.trim(),repo:$('#lr').value.trim(),token:$('#lt').value.trim()};try{localStorage.setItem(GK,JSON.stringify(G))}catch(e){}start()}}
