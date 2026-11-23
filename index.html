@@ -119,7 +119,7 @@ try{await check();const v=await pull();if(v)S=v;on=1;document.body.classList.rem
 catch(e){if(typeof e=='string'&&/Token|Repositório|PÚBLICO/.test(e))return lock(e);$('#m').innerHTML=`<div class="lock"><h2>Sem conexão</h2><p class="mut">Não consegui carregar seus dados do GitHub. Verifique a internet.</p><button class="b" id="rt">Tentar de novo</button></div>`;$('#rt').onclick=start}}
 function lock(msg){on=0;document.body.classList.add('lk');setSv('off');const d=G||{};
 $('#m').innerHTML=`<form class="lock" id="lf"><h2>Entrar</h2><p class="mut">Este ateliê é privado. Os dados ficam num repositório privado do seu GitHub e só abrem com o seu token.</p>${msg?`<p class="er">${esc(msg)}</p>`:''}
-<label>Usuário do GitHub<input id="lo" required autocomplete="username" value="${esc(d.owner||location.hostname.split('.')[0]||'')}"></label>
+<label>Usuário do GitHub<input id="lo" required autocomplete="username" value="${esc(d.owner||'')}"></label>
 <label>Repositório privado dos dados<input id="lr" required value="${esc(d.repo||'atelie-dados')}"></label>
 <label>Token de acesso<input id="lt" type="password" required autocomplete="current-password" placeholder="github_pat_…"></label>
 <button class="b">Entrar</button><p class="mut"><small>O token fica salvo só neste aparelho. Use “Sair deste aparelho” em Exportar para apagá-lo.</small></p></form>`;
