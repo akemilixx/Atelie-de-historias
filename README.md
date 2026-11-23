@@ -19,7 +19,7 @@ Você precisa de uma conta no GitHub. Não precisa instalar nada.
    - Permissions → Repository permissions → **Contents: Read and write**
    - Escolha a validade que preferir.
    - Copie o token gerado (começa com `github_pat_`). Ele só aparece uma vez.
-3. **Entre no site** e preencha:
+3. **Entre no site** — <https://akemilixx.github.io/Atelie-de-historias/> — e preencha:
    - **Usuário do GitHub:** o seu nome de usuário
    - **Repositório privado dos dados:** o nome do repositório do passo 1
    - **Token de acesso:** o token do passo 2
