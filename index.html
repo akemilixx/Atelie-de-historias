@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Ateliê de histórias</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Onest:wght@400;500;600&family=Caveat:wght@500;700&display=swap">
+<style>
+*{box-sizing:border-box}
+:root{--bg:#F2E5C5;--fg:#3A000C;--pn:#E9D8AE;--ac:#75162E;--on:#F2E5C5;--ln:rgba(58,0,12,.2);color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#3A000C;--fg:#F2E5C5;--pn:#550B18;--ac:#75162E;--ln:rgba(242,229,197,.2);color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#3A000C;--fg:#F2E5C5;--pn:#550B18;--ac:#75162E;--ln:rgba(242,229,197,.2);color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 Onest,system-ui,sans-serif}
+h1,h2,h3{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;margin:0}
+h1{font-size:34px;font-style:italic}h2{font-size:28px}h3{font-size:22px}
+header{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--ln)}
+nav{display:flex;gap:6px;flex-wrap:wrap}
+button,select,input,textarea{font:inherit;color:inherit}
+nav button,.tabs button,.tb button,.tb label{background:none;border:1px solid var(--ac);border-radius:999px;padding:6px 14px;cursor:pointer;color:var(--fg)}
+nav button.on,.tabs button.on,.tb .on{background:var(--ac);color:#F2E5C5}
+.b{background:var(--ac);color:#F2E5C5;border:1px solid var(--ac);border-radius:10px;padding:7px 14px;cursor:pointer}
+.b.g{background:none;color:var(--fg)}
+main{max-width:1100px;margin:0 auto;padding:20px}
+.row{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin:0 0 14px}
+.mut{opacity:.75;margin:4px 0 12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+.card{background:var(--pn);border:1px solid var(--ac);border-radius:14px;padding:16px;text-align:left;cursor:pointer;color:var(--fg)}
+.card small{display:block;opacity:.75;margin-top:4px}
+label.card{display:block}
+.ti{flex:1;min-width:150px;background:none;border:0;border-bottom:1px solid var(--ln);font:italic 600 26px 'Cormorant Garamond',serif;padding:4px 2px}
+select,.pg,.ans textarea{background:var(--pn);border:1px solid var(--ln);border-radius:10px}
+select{padding:6px 8px;max-width:100%}
+.tb{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:10px}
+.tb button,.tb label{padding:5px 11px;font-size:14px}
+.sw{width:24px;height:24px;border-radius:50%!important;padding:0!important;border:2px solid var(--fg)!important}
+.sw.on{outline:3px solid var(--ac);outline-offset:2px}
+.sc{overflow:auto;height:68vh;min-height:360px;border:2px solid var(--ac);border-radius:14px;background:#F2E5C5;-webkit-overflow-scrolling:touch}
+.st{position:relative;width:1800px;height:1300px;background:radial-gradient(circle,rgba(58,0,12,.16) 1px,transparent 1.6px) 0 0/28px 28px #F2E5C5}
+.st canvas{position:absolute;inset:0;z-index:5;pointer-events:auto;cursor:crosshair;touch-action:none}
+.st.mv canvas{pointer-events:none}
+.st:not(.mv) .it{pointer-events:none}
+.it{position:absolute;min-width:90px;min-height:50px;resize:both;overflow:hidden;border:1px dashed transparent;z-index:1}
+.st.mv .it{border-color:#75162E}
+.bar{display:none;position:absolute;top:0;left:0;right:0;height:20px;background:#75162E;color:#F2E5C5;z-index:2;justify-content:space-between;padding:0 8px;font-size:14px;line-height:20px}
+.st.mv .bar{display:flex}
+.gr{cursor:grab;touch-action:none;flex:1}.x{cursor:pointer;padding-left:10px}
+.tx{height:100%;overflow:auto;padding:24px 8px 6px;font:700 23px/1.2 Caveat,cursive;color:#3A000C;outline:none;white-space:pre-wrap}
+.it img{width:100%;height:100%;object-fit:contain;display:block;user-select:none}
+.tabs{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap}
+.pg{padding:14px 10px}
+.np{width:100%;border:0;background:repeating-linear-gradient(transparent,transparent 31px,var(--ln) 31px,var(--ln) 32px) local;line-height:32px;padding:0 10px;resize:vertical;outline:none}
+.fg{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px 18px}
+.fg label{font:italic 600 18px 'Cormorant Garamond',serif}
+.fg textarea{font:15px/32px Onest,sans-serif;display:block}
+details{background:var(--pn);border:1px solid var(--ac);border-radius:14px;padding:12px 16px;margin-bottom:10px}
+summary{cursor:pointer;display:flex;justify-content:space-between;gap:10px;font-size:17px}
+summary small{opacity:.75;white-space:nowrap}
+.ans{margin:10px 0;padding:10px;border:1px solid var(--ln);border-radius:12px}
+.ans textarea{padding:0 10px}
+.lk nav{display:none}
+.lock{max-width:460px;margin:30px auto;background:var(--pn);border:1px solid var(--ac);border-radius:14px;padding:22px}
+.lock label{display:block;margin:12px 0 4px;font-weight:500}
+.lock input{width:100%;padding:8px 10px;background:var(--bg);border:1px solid var(--ln);border-radius:10px}
+.lock .b{margin-top:16px;width:100%}
+.lock .er{color:#B3261E;font-weight:500}
+#ts{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--ac);color:#F2E5C5;padding:10px 16px;border-radius:10px;z-index:9;max-width:90vw}
+</style></head>
+<body>
+<header><h1>Ateliê de histórias</h1>
+<nav id="nav"><button data-v="ideias">Ideias</button><button data-v="escritos">Escritos</button><button data-v="exercicios">Exercícios</button><button data-v="backup">Exportar</button><button id="th" title="Alternar tema">◐</button></nav><small id="sv" class="mut"></small></header>
+<main id="m"><p class="mut">Carregando…</p></main><div id="ts" hidden></div>
+<script>
+const $=(s,e=document)=>e.querySelector(s),$$=(s,e=document)=>[...e.querySelectorAll(s)];
+const uid=()=>Math.random().toString(36).slice(2,9);
+const esc=s=>String(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const K='atelie-v1';
+const F=['Imagem / de onde veio','Emoção central (1 frase)','Personagem principal','O que ela/ele quer','Do que ela/ele precisa','Por que não consegue (externo / interno)','Onde está o conflito','Cena de abertura','Cena mais forte','Final (ou emoção final)','Ponto de vista e tempo (ex.: 3ª limitada, passado)','Tamanho que combina (cena, conto curto…)'];
+const TPL='1. Vale a pena agora?\n\n\n2. Qual é a emoção central? (uma frase)\n\n\n3. Quem é o personagem e o que ele quer? (quer, precisa e por que não consegue)\n\n\n4. Onde está o conflito? (personagem × cenário × trama)\n\n\n5. Pontos no mapa (cena de abertura, cena mais forte e final)\n\n\n6. Uma cena para escrever (500 a 1.000 palavras, editor interno desligado)\n';
+const E=[
+['A frase da emoção',5,'Achar o que a imagem faz você sentir. Essa frase vira a bússola da história.',['Olhe a imagem por um minuto, sem pensar em história ainda.','Complete: “Essa imagem me faz sentir ____ por causa de ____.”','Troque a emoção por uma mais específica.','Guarde a frase: ela diz depois se uma cena está funcionando.']],
+['Antes e depois',10,'Toda imagem é um instante parado. O que veio antes e depois já cria a trama.',['Uma frase sobre o que aconteceu cinco minutos antes.','Uma frase sobre o que acontece cinco minutos depois.','Uma frase sobre o que aconteceu um ano antes e explica tudo.','Veja qual te deixou mais curiosa: essa é a ponta do fio.']],
+['Quer, precisa e por que não consegue',10,'Dar motivação ao personagem.',['Escolha uma pessoa (ou criatura) da imagem.','Escreva o que ela QUER e do que ela PRECISA (ainda não percebeu).','Para cada um: por que não consegue? Barreira externa ou interna?','Quando o querer e o precisar puxam para lados opostos, a história aparece.']],
+['Parágrafo dos cinco sentidos',15,'Treinar escrita concreta, sem precisar de enredo.',['Um parágrafo dentro da imagem, em terceira pessoa limitada.','Inclua pelo menos três sentidos além da visão.','Inclua um pensamento do personagem que não aparece na imagem.','Não apague nada enquanto escreve.']],
+['Conflito em miniatura',15,'Toda cena precisa de alguém querendo algo e algo atrapalhando.',['Escolha dois personagens (ou invente o segundo).','Dê a cada um um desejo na cena.','Escreva um diálogo curto (8 a 12 falas) sem briga física.','O conflito pode ser educado, tenso, doce ou cruel.']],
+['Os três pontos no mapa',10,'Planejar só o essencial, sem fechar a história inteira.',['Cena de abertura (já com algum conflito).','A cena mais forte, a que você mais quer ver pronta.','O final (nem que seja só a emoção final).','Não planeje o meio.']],
+['Chuva de “e se”',10,'Gerar elementos sem compromisso.',['Escreva 10 perguntas começando com “e se” sobre a imagem.','Não censure nenhuma, nem as bobas.','Escolha no máximo duas que dão arrepio ou curiosidade.','Só fica o que combina com a emoção central.']],
+['Começar pelo fim',15,'Pensar primeiro nas cenas de maior impacto.',['Trate a imagem como a cena final ou a de maior impacto.','Escreva três coisas que precisam ter acontecido antes para ela doer tanto.','Ordene as três: você já tem o esqueleto de um conto.']],
+['Mesma cena, outro ponto de vista',20,'Perceber como o narrador muda a história.',['5 a 8 linhas da cena em primeira pessoa.','Reescreva em terceira pessoa limitada, mesmo personagem.','Compare: em qual a emoção ficou mais forte? Onde há mais liberdade?']],
+['Carta ou diário de um personagem',15,'Escrever uma voz sem construir cena, cenário ou trama.',['Escolha um personagem da imagem.','Escreva uma carta ou página de diário logo depois do momento da imagem.','Deixe escapar algo que ele não conta para ninguém.']],
+['O mundo atrapalhando o personagem',10,'Criar conflito a partir do cenário.',['Descreva o lugar da imagem em duas frases.','Invente uma regra desse mundo (lei, crença, maldição, costume).','Escreva como essa regra impede o personagem de conseguir o que quer.']]];
+const mkI=(t,txt)=>({id:uid(),t,ink:'',items:[{id:uid(),k:'t',x:40,y:40,w:440,h:300,txt}]});
+function seed(){return{ideas:[],stories:[],ex:{}}}
+let S=seed(),V={tab:'ideias',idea:null,story:null,sTab:'roteiro',open:{}},T={tool:'pen',color:'#3A000C',size:3};
+/* ---------- GITHUB (repositório privado) ---------- */
+const GK='atelie-gh';let G=null;try{G=JSON.parse(localStorage.getItem(GK))}catch(e){}
+const api=(p,o={})=>fetch('https://api.github.com/repos/'+G.owner+'/'+G.repo+p,{cache:'no-store',...o,headers:{Authorization:'Bearer '+G.token,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28',...(o.headers||{})}});
+const b64=s=>new Promise((r,j)=>{const f=new FileReader();f.onload=()=>r(f.result.slice(f.result.indexOf(',')+1));f.onerror=()=>j(f.error);f.readAsDataURL(new Blob([s]))});
+let on=0,sha={},last={},busy=0,dirty=0,ct;
+const setSv=s=>{const e=$('#sv');if(e)e.textContent={ok:'🔒 salvo no GitHub (privado)',w:'🔒 salvando…',err:'⚠ erro ao salvar',off:''}[s]||''};
+function files(){const m={'ex.json':JSON.stringify(S.ex),'st.json':JSON.stringify(S.stories)};S.ideas.forEach(i=>m['i_'+i.id+'.json']=JSON.stringify(i));m['ix.json']=JSON.stringify(S.ideas.map(i=>i.id));return m}
+async function curSha(n){const r=await api('/contents/data/'+n);return r.ok?(await r.json()).sha:undefined}
+async function put(n,s){for(let t=0;t<2;t++){const r=await api('/contents/data/'+n,{method:'PUT',body:JSON.stringify({message:'Salvar '+n,content:await b64(s),...(sha[n]?{sha:sha[n]}:{})})});
+if(r.ok){sha[n]=(await r.json()).content.sha;return}if(t==0&&(r.status==409||r.status==422)){sha[n]=await curSha(n);continue}throw r}}
+async function rm(n){if(!sha[n])sha[n]=await curSha(n);if(sha[n]){const r=await api('/contents/data/'+n,{method:'DELETE',body:JSON.stringify({message:'Apagar '+n,sha:sha[n]})});if(!r.ok&&r.status!=404)throw r}delete sha[n]}
+function save(){dirty=1;if(!on)return;setSv('w');clearTimeout(ct);ct=setTimeout(push,2000)}
+async function push(){if(!on)return;if(busy){clearTimeout(ct);ct=setTimeout(push,1500);return}busy=1;dirty=0;
+try{const m=files();for(const k in m){if(last[k]===m[k])continue;await put(k,m[k]);last[k]=m[k]}
+for(const k in last)if(!(k in m)){await rm(k);delete last[k]}
+setSv(dirty?'w':'ok')}catch(e){dirty=1;setSv('err');if(e&&e.status==401){toast('O token expirou ou foi revogado. Entre de novo.');return lock('Token inválido ou expirado.')}
+toast('Não consegui salvar no GitHub agora. Tento de novo em instantes.');clearTimeout(ct);ct=setTimeout(push,20000)}finally{busy=0}}
+async function pull(){const r=await api('/contents/data');if(r.status==404||r.status==409)return null;if(!r.ok)throw r;
+const raw={};await Promise.all((await r.json()).filter(f=>f.type=='file'&&/\.json$/.test(f.name)).map(async f=>{sha[f.name]=f.sha;const b=await api('/git/blobs/'+f.sha,{headers:{Accept:'application/vnd.github.raw'}});if(!b.ok)throw b;raw[f.name]=await b.text()}));
+last={...raw};const J=n=>{try{return raw[n]?JSON.parse(raw[n]):undefined}catch(e){}};const ix=J('ix.json');if(!ix)return null;
+return{ideas:ix.map(i=>J('i_'+i+'.json')).filter(Boolean),stories:J('st.json')||[],ex:J('ex.json')||{}}}
+async function check(){const r=await api('');if(r.status==401)throw'Token inválido ou expirado.';if(r.status==403||r.status==404)throw'Repositório não encontrado, ou o token não tem acesso a ele.';if(!r.ok)throw'O GitHub não respondeu ('+r.status+'). Tente de novo.';
+if(!(await r.json()).private)throw'Esse repositório é PÚBLICO. Para manter tudo privado, use um repositório privado.'}
+async function start(){document.body.classList.add('lk');if(!G||!G.token)return lock();$('#m').innerHTML='<p class="mut">Abrindo seu ateliê…</p>';
+try{await check();const v=await pull();if(v)S=v;on=1;document.body.classList.remove('lk');if(!v)push();setSv('ok');R()}
+catch(e){if(typeof e=='string'&&/Token|Repositório|PÚBLICO/.test(e))return lock(e);$('#m').innerHTML=`<div class="lock"><h2>Sem conexão</h2><p class="mut">Não consegui carregar seus dados do GitHub. Verifique a internet.</p><button class="b" id="rt">Tentar de novo</button></div>`;$('#rt').onclick=start}}
+function lock(msg){on=0;document.body.classList.add('lk');setSv('off');const d=G||{};
+$('#m').innerHTML=`<form class="lock" id="lf"><h2>Entrar</h2><p class="mut">Este ateliê é privado. Os dados ficam num repositório privado do seu GitHub e só abrem com o seu token.</p>${msg?`<p class="er">${esc(msg)}</p>`:''}
+<label>Usuário do GitHub<input id="lo" required autocomplete="username" value="${esc(d.owner||location.hostname.split('.')[0]||'')}"></label>
+<label>Repositório privado dos dados<input id="lr" required value="${esc(d.repo||'atelie-dados')}"></label>
+<label>Token de acesso<input id="lt" type="password" required autocomplete="current-password" placeholder="github_pat_…"></label>
+<button class="b">Entrar</button><p class="mut"><small>O token fica salvo só neste aparelho. Use “Sair deste aparelho” em Exportar para apagá-lo.</small></p></form>`;
+$('#lf').onsubmit=e=>{e.preventDefault();G={owner:$('#lo').value.trim(),repo:$('#lr').value.trim(),token:$('#lt').value.trim()};try{localStorage.setItem(GK,JSON.stringify(G))}catch(e){}start()}}
+function logout(){try{localStorage.removeItem(GK)}catch(e){}location.reload()}
+document.addEventListener('visibilitychange',()=>{if(document.hidden&&on&&dirty)push()});
+addEventListener('beforeunload',e=>{if(on&&(dirty||busy)){e.preventDefault();e.returnValue=''}});
+function toast(t){const e=$('#ts');e.textContent=t;e.hidden=false;setTimeout(()=>e.hidden=true,4500)}
+function del(b,fn){b.onclick=()=>{if(b.dataset.c)return fn();b.dataset.c=1;const l=b.textContent;b.textContent='Confirmar?';setTimeout(()=>{delete b.dataset.c;b.textContent=l},3000)}}
+const ideaT=id=>{const i=S.ideas.find(x=>x.id==id);return i?'Ideia: '+i.t:'Sem ideia vinculada'};
+const opts=s=>'<option value="">Sem ideia vinculada</option>'+S.ideas.map(i=>`<option value="${i.id}" ${i.id==s?'selected':''}>${esc(i.t)}</option>`).join('');
+function R(){$$('#nav [data-v]').forEach(b=>b.classList.toggle('on',b.dataset.v==V.tab));const m=$('#m');({ideias:vIdeas,escritos:vEsc,exercicios:vEx,backup:vBk})[V.tab](m)}
+$$('#nav [data-v]').forEach(b=>b.onclick=()=>{if(V.tab==b.dataset.v){V.idea=V.story=null}V.tab=b.dataset.v;R()});
+try{const t=localStorage.getItem('atelie-th');if(t)document.documentElement.dataset.theme=t}catch(e){}
+$('#th').onclick=()=>{const r=document.documentElement,d=r.dataset.theme?r.dataset.theme=='dark':matchMedia('(prefers-color-scheme:dark)').matches;r.dataset.theme=d?'light':'dark';try{localStorage.setItem('atelie-th',r.dataset.theme)}catch(e){}};
+
+/* ---------- IDEIAS ---------- */
+function vIdeas(m){if(V.idea)return board(m);
+m.innerHTML=`<div class="row"><h2>Quadros de ideias</h2><button class="b" id="ni">+ Nova ideia</button></div><div class="grid">${S.ideas.map(i=>`<button class="card" data-i="${i.id}"><h3>${esc(i.t)}</h3><small>${i.items.length} itens${i.ink?' · com desenho':''}</small></button>`).join('')}</div>`;
+$('#ni').onclick=()=>{const i={id:uid(),t:'Nova ideia',ink:'',items:[]};S.ideas.push(i);V.idea=i.id;save();R()};
+$$('[data-i]',m).forEach(b=>b.onclick=()=>{V.idea=b.dataset.i;R()})}
+function setTool(t){T.tool=t;$$('[data-t]').forEach(b=>b.classList.toggle('on',b.dataset.t==t));$('.st').classList.toggle('mv',t=='mv')}
+function board(m){const i=S.ideas.find(x=>x.id==V.idea);
+m.innerHTML=`<div class="row"><button class="b g" id="bk">← Quadros</button><input class="ti" id="tt" value="${esc(i.t)}"><button class="b" id="wr">Escrever sobre isso</button></div>
+<div class="tb"><button data-t="pen">✎ Caneta</button><button data-t="er">⌫ Borracha</button><button data-t="mv">✥ Mover / editar</button>
+${['#3A000C','#75162E','#550B18','#1F3B4D'].map(c=>`<button class="sw ${c==T.color?'on':''}" data-c="${c}" style="background:${c}" title="Cor"></button>`).join('')}
+<input type="range" id="sz" min="1" max="14" value="${T.size}" title="Espessura">
+<button id="at">T Texto</button><label>🖼 Imagem<input type="file" id="fi" accept="image/*" hidden></label><button id="cl" class="g">Limpar desenho</button><button id="ep">⇩ Exportar PNG</button><button id="dq" class="g">Excluir quadro</button></div>
+<div class="sc"><div class="st"><canvas width="1800" height="1300"></canvas></div></div>
+<p class="mut">Caneta e borracha desenham; em “Mover / editar” você arrasta (✥), apaga (×), redimensiona (canto) e digita nos textos.</p>`;
+const st=$('.st',m),c=$('canvas',m),sc=$('.sc',m),x=c.getContext('2d');x.lineCap=x.lineJoin='round';
+if(i.ink){const im=new Image();im.onload=()=>x.drawImage(im,0,0);im.src=i.ink}
+let d=0;const up=()=>{if(!d)return;d=0;i.ink=c.toDataURL();save()};
+c.onpointerdown=e=>{d=1;c.setPointerCapture(e.pointerId);const er=T.tool=='er';x.globalCompositeOperation=er?'destination-out':'source-over';x.strokeStyle=T.color;x.lineWidth=er?T.size*4:T.size;x.beginPath();x.moveTo(e.offsetX,e.offsetY);x.lineTo(e.offsetX+.1,e.offsetY);x.stroke()};
+c.onpointermove=e=>{if(!d)return;x.lineTo(e.offsetX,e.offsetY);x.stroke();x.beginPath();x.moveTo(e.offsetX,e.offsetY)};
+c.onpointerup=c.onpointercancel=up;
+const ro=new ResizeObserver(es=>es.forEach(e=>{const t=e.target,it=t._it;if(it&&t.offsetWidth&&(it.w!=t.offsetWidth||it.h!=t.offsetHeight)){it.w=t.offsetWidth;it.h=t.offsetHeight;save()}}));
+const add=it=>{const el=document.createElement('div');el.className='it';el._it=it;Object.assign(el.style,{left:it.x+'px',top:it.y+'px',width:it.w+'px',height:it.h+'px'});
+el.innerHTML='<div class="bar"><span class="gr">✥</span><span class="x">×</span></div>'+(it.k=='t'?`<div class="tx" contenteditable>${esc(it.txt).replace(/\n/g,'<br>')}</div>`:`<img src="${it.src}" draggable="false" alt="">`);
+const g=$('.gr',el);g.onpointerdown=e=>{e.preventDefault();g.setPointerCapture(e.pointerId);const ox=e.clientX-it.x,oy=e.clientY-it.y;g.onpointermove=v=>{it.x=Math.max(0,v.clientX-ox);it.y=Math.max(0,v.clientY-oy);el.style.left=it.x+'px';el.style.top=it.y+'px'};g.onpointerup=()=>{g.onpointermove=g.onpointerup=null;save()}};
+$('.x',el).onclick=()=>{i.items=i.items.filter(z=>z!=it);el.remove();save()};
+const tx=$('.tx',el);if(tx)tx.oninput=()=>{it.txt=tx.innerText;save()};
+st.appendChild(el);ro.observe(el);return el};
+i.items.forEach(add);setTool(T.tool);
+$$('[data-t]',m).forEach(b=>b.onclick=()=>setTool(b.dataset.t));
+$$('[data-c]',m).forEach(b=>b.onclick=()=>{T.color=b.dataset.c;$$('[data-c]',m).forEach(z=>z.classList.toggle('on',z==b));if(T.tool=='mv')setTool('pen')});
+$('#sz').oninput=e=>T.size=+e.target.value;
+$('#tt').oninput=e=>{i.t=e.target.value;save()};
+$('#bk').onclick=()=>{V.idea=null;R()};
+$('#wr').onclick=()=>newStory(i.id);
+$('#at').onclick=()=>{const it={id:uid(),k:'t',x:sc.scrollLeft+40,y:sc.scrollTop+40,w:260,h:140,txt:''};i.items.push(it);const el=add(it);setTool('mv');save();$('.tx',el).focus()};
+$('#fi').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const k=Math.min(1,800/Math.max(im.width,im.height)),cv=document.createElement('canvas');cv.width=im.width*k;cv.height=im.height*k;cv.getContext('2d').drawImage(im,0,0,cv.width,cv.height);const w=Math.min(320,cv.width),it={id:uid(),k:'i',x:sc.scrollLeft+40,y:sc.scrollTop+40,w,h:Math.round(w*cv.height/cv.width),src:cv.toDataURL('image/jpeg',.78)};i.items.push(it);add(it);setTool('mv');save()};im.src=r.result};r.readAsDataURL(f);e.target.value=''};
+del($('#cl'),()=>{x.clearRect(0,0,1800,1300);i.ink='';save();R()});
+del($('#dq'),()=>{S.ideas=S.ideas.filter(z=>z!=i);V.idea=null;save();R()});$('#ep').onclick=()=>expBoard(i)}
+
+/* ---------- ESCRITOS ---------- */
+function newStory(idea){const s={id:uid(),t:'Nova história',idea,roteiro:TPL,ficha:{},rascunho:''};S.stories.push(s);V.story=s.id;V.tab='escritos';V.sTab='roteiro';save();R()}
+function vEsc(m){const st=S.stories.find(s=>s.id==V.story);
+if(!st){m.innerHTML=`<div class="row"><h2>Escritos</h2><button class="b" id="ns">+ Nova história</button></div><div class="grid">${S.stories.map(s=>`<button class="card" data-s="${s.id}"><h3>${esc(s.t)}</h3><small>${esc(ideaT(s.idea))}</small></button>`).join('')}</div>${S.stories.length?'':'<p class="mut">Nenhuma história ainda. Crie uma aqui ou use “Escrever sobre isso” em um quadro de ideias.</p>'}`;
+$('#ns').onclick=()=>newStory('');$$('[data-s]',m).forEach(b=>b.onclick=()=>{V.story=b.dataset.s;R()});return}
+const k=V.sTab;let body;
+if(k=='ficha')body=`<div class="fg">${F.map((f,n)=>`<label>${f}<textarea class="np" rows="3" data-f="${n}">${esc(st.ficha[n])}</textarea></label>`).join('')}</div>`;
+else body=`<textarea class="np" id="ta" rows="${k=='roteiro'?24:30}" placeholder="${k=='roteiro'?'':'Escreva à vontade, sem apagar nada…'}">${esc(st[k])}</textarea>${k=='rascunho'?'<small id="wc"></small>':''}`;
+m.innerHTML=`<div class="row"><button class="b g" id="bk">← Histórias</button><input class="ti" id="tt" value="${esc(st.t)}"></div>
+<div class="row"><label class="mut">Ideia: <select id="si">${opts(st.idea)}</select></label><span><button class="b g" id="ex">⇩ Exportar (.md)</button> <button class="b g" id="dl">Excluir história</button></span></div>
+<div class="tabs">${[['roteiro','Roteiro inicial'],['ficha','Ficha'],['rascunho','Rascunho']].map(([a,l])=>`<button data-k="${a}" class="${k==a?'on':''}">${l}</button>`).join('')}</div><div class="pg">${body}</div>`;
+$('#bk').onclick=()=>{V.story=null;R()};
+$('#tt').oninput=e=>{st.t=e.target.value;save()};
+$('#si').onchange=e=>{st.idea=e.target.value;save()};
+del($('#dl'),()=>{S.stories=S.stories.filter(z=>z!=st);V.story=null;save();R()});
+$('#ex').onclick=()=>saveF((st.t||'historia')+'.md',storyMd(st));
+$$('[data-k]',m).forEach(b=>b.onclick=()=>{V.sTab=b.dataset.k;R()});
+$$('[data-f]',m).forEach(t=>t.oninput=()=>{st.ficha[t.dataset.f]=t.value;save()});
+const ta=$('#ta');if(ta){const wc=()=>{const w=$('#wc');if(w)w.textContent=(ta.value.trim()?ta.value.trim().split(/\s+/).length:0)+' palavras'};ta.oninput=()=>{st[k]=ta.value;wc();save()};wc()}}
+
+/* ---------- EXPORTAR ---------- */
+function saveF(name,data){const b=data instanceof Blob?data:new Blob([data],{type:'text/plain;charset=utf-8'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000)}
+function storyMd(s){return `\n### ${s.t}\n${s.idea?'\n'+ideaT(s.idea)+'\n':''}\n#### Roteiro inicial\n\n${s.roteiro}\n\n#### Ficha\n\n${F.map((f,n)=>`**${f}:** ${s.ficha[n]||''}`).join('\n\n')}\n\n#### Rascunho\n\n${s.rascunho}\n`}
+function md(){let o='# Ateliê de histórias\n\n## Ideias\n';S.ideas.forEach(i=>{o+=`\n### ${i.t}\n`;i.items.filter(z=>z.k=='t'&&z.txt).forEach(z=>o+=`\n${z.txt}\n`)});o+='\n## Histórias\n';S.stories.forEach(s=>o+=storyMd(s));o+='\n## Exercícios\n';E.forEach((e,n)=>(S.ex[n]||[]).forEach(r=>o+=`\n### ${n+1}. ${e[0]}\n${r.idea?'\n'+ideaT(r.idea)+'\n':''}\n${r.txt}\n`));return o}
+async function expBoard(i){const c=document.createElement('canvas');c.width=1800;c.height=1300;const x=c.getContext('2d');x.fillStyle='#F2E5C5';x.fillRect(0,0,1800,1300);
+const ld=s=>new Promise(r=>{const m=new Image();m.onload=()=>r(m);m.onerror=()=>r(null);m.src=s});
+for(const it of i.items){if(it.k=='i'){const m=await ld(it.src);if(m){const k=Math.min(it.w/m.width,it.h/m.height);x.drawImage(m,it.x+(it.w-m.width*k)/2,it.y+(it.h-m.height*k)/2,m.width*k,m.height*k)}}else{x.font='700 23px Caveat,cursive';x.fillStyle='#3A000C';x.textBaseline='top';let y=it.y+24;(it.txt||'').split('\n').forEach(p=>{let l='';p.split(' ').forEach(w=>{const n=l?l+' '+w:w;if(l&&x.measureText(n).width>it.w-16){x.fillText(l,it.x+8,y);y+=28;l=w}else l=n});x.fillText(l,it.x+8,y);y+=28})}}
+if(i.ink){const m=await ld(i.ink);if(m)x.drawImage(m,0,0)}
+c.toBlob(b=>b?saveF((i.t||'quadro')+'.png',b):toast('Não consegui gerar a imagem.'))}
+function vBk(m){m.innerHTML=`<h2>Exportar e backup</h2><p class="mut">Seus dados são salvos automaticamente num repositório privado do seu GitHub (<b>${esc(G.owner)}/${esc(G.repo)}</b>) e aparecem em qualquer aparelho em que você entrar com o seu token. Baixar uma cópia é opcional.</p><div class="grid"><button class="card" id="e1"><h3>Backup completo</h3><small>.json com tudo (quadros, desenhos, imagens, histórias e respostas). Dá para restaurar depois.</small></button><button class="card" id="e2"><h3>Textos em Markdown</h3><small>.md com os textos dos quadros, as histórias e as respostas dos exercícios.</small></button><label class="card"><h3>Restaurar backup</h3><small>Escolha um .json baixado antes. Substitui o conteúdo atual.</small><input type="file" id="e3" accept=".json,application/json" hidden></label></div><p class="mut">Para exportar um quadro como imagem, ou uma história só, use o botão ⇩ dentro dele.</p><p><button class="b g" id="lg">Sair deste aparelho</button></p>`;
+del($('#lg'),logout);
+$('#e1').onclick=()=>saveF('atelie-backup-'+new Date().toISOString().slice(0,10)+'.json',JSON.stringify(S));
+$('#e2').onclick=()=>saveF('atelie-textos.md',md());
+$('#e3').onchange=e=>{const f=e.target.files[0];if(!f)return;f.text().then(t=>{const d=JSON.parse(t);if(!d.ideas||!d.stories||!d.ex)throw 0;S=d;V.idea=V.story=null;save();toast('Backup restaurado.');R()}).catch(()=>toast('Arquivo de backup inválido.'));e.target.value=''}}
+
+/* ---------- EXERCÍCIOS ---------- */
+function vEx(m){
+m.innerHTML=`<h2>Exercícios</h2><p class="mut">Escolha um por vez, de acordo com a energia do dia. Nenhum precisa virar história completa.</p>`+E.map((e,n)=>{const a=S.ex[n]||[];
+return `<details data-n="${n}" ${V.open[n]?'open':''}><summary><b>${n+1}. ${e[0]}</b><small>${e[1]} min · ${a.length} resp.</small></summary><p class="mut">${e[2]}</p><ol>${e[3].map(s=>`<li>${s}</li>`).join('')}</ol>${a.map(r=>`<div class="ans" data-r="${r.id}"><div class="row"><select>${opts(r.idea)}</select><button class="b g rm">Excluir</button></div><textarea class="np" rows="6" placeholder="Sua resposta…">${esc(r.txt)}</textarea></div>`).join('')}<button class="b ad">+ Registrar resposta</button></details>`}).join('');
+$$('details',m).forEach(d=>{const n=d.dataset.n;d.ontoggle=()=>V.open[n]=d.open;
+$('.ad',d).onclick=()=>{(S.ex[n]=S.ex[n]||[]).push({id:uid(),idea:'',txt:''});V.open[n]=true;save();R()};
+$$('.ans',d).forEach(el=>{const r=S.ex[n].find(z=>z.id==el.dataset.r);
+$('select',el).onchange=e=>{r.idea=e.target.value;save()};
+$('textarea',el).oninput=e=>{r.txt=e.target.value;save()};
+del($('.rm',el),()=>{S.ex[n]=S.ex[n].filter(z=>z!=r);V.open[n]=true;save();R()})})})}
+start();
+</script></body></html>
